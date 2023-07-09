@@ -9,12 +9,14 @@ const AuthInput = ({
   value,
   onChangeText,
   maxLength,
+  keyboardType,
 }) => {
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
         maxLength={maxLength}
+        keyboardType={keyboardType}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
         value={value}
