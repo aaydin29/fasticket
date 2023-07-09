@@ -1,0 +1,10 @@
+export {default as ArrowCircle} from './ArrowCircle';
+export {default as ArrowFull} from './ArrowFull';
+export {default as Birthday} from './Birthday';
+export {default as CheckCircle} from './CheckCircle';
+export {default as IdCard} from './IdCard';
+export {default as Key} from './Key';
+export {default as Logout} from './Logout';
+export {default as Mail} from './Mail';
+export {default as MenuLines} from './MenuLines';
+export {default as User} from './User';
