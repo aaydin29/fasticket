@@ -8,7 +8,7 @@ import BottomButtons from '../../components/cards/BottomButtons';
 import HomeSelectionsCard from '../../components/cards/HomeSelectionsCard';
 import ticketsData from '../../utils/ticketData.json';
 import {
-  changeBusTickets,
+  changeAvailableBusTickets,
   changeButtonLoading,
   changeHomeSelections,
 } from '../../redux/reducers';
@@ -53,9 +53,9 @@ const Home = ({navigation}) => {
             ticket.departureDate === formattedWhenDate,
         );
         if (filteredTickets.length > 0) {
-          dispatch(changeBusTickets(filteredTickets));
+          dispatch(changeAvailableBusTickets(filteredTickets));
           dispatch(changeButtonLoading(false));
-          navigation.navigate('Seats');
+          navigation.navigate('Schedules');
         } else {
           showMessage({
             message: 'No available tickets found!',
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
   },
   header_text: {
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: 'Montserrat-SemiBold',
     fontSize: 20,
     color: colors.lightBlack,
     flex: 1,
@@ -123,6 +123,6 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    paddingTop: 20,
+    paddingTop: 10,
   },
 });

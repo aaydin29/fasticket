@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import Collapsible from 'react-native-collapsible';
 import colors from '../../styles/colors';
@@ -9,6 +9,7 @@ import cities from '../../utils/Cities.json';
 import whoData from '../../utils/whoData.json';
 import DatePicker from 'react-native-date-picker';
 import {changeHomeSelections} from '../../redux/reducers';
+import {format, startOfDay} from 'date-fns';
 
 const HomeSelectionsCard = () => {
   const homeSelections = useSelector(state => state.homeSelections);
@@ -39,17 +40,29 @@ const HomeSelectionsCard = () => {
 
   function handleSelections(key, value) {
     if (key === 'whenDate') {
+      const formattedDate = format(value, 'MM/dd/yyyy');
       setWhenDate(value);
       dispatch(
         changeHomeSelections({
           ...homeSelections,
-          [key]: value.toLocaleDateString(),
+          [key]: formattedDate,
         }),
       );
     } else {
       dispatch(changeHomeSelections({...homeSelections, [key]: value.value}));
     }
   }
+
+  useEffect(() => {
+    if (!homeSelections.whenDate) {
+      const today = new Date();
+      const formattedDate = format(today, 'MM/dd/yyyy');
+      setWhenDate(today);
+      dispatch(
+        changeHomeSelections({...homeSelections, whenDate: formattedDate}),
+      );
+    }
+  }, [dispatch, homeSelections]);
 
   return (
     <View>
@@ -99,8 +112,8 @@ const HomeSelectionsCard = () => {
             mode="date"
             date={whenDate}
             onDateChange={value => handleSelections('whenDate', value)}
-            minimumDate={new Date()}
-            maximumDate={new Date('2024-01-01')}
+            minimumDate={startOfDay(new Date())}
+            maximumDate={startOfDay(new Date('2024-01-01'))}
           />
         </Collapsible>
       </View>

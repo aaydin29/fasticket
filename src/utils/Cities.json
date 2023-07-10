@@ -1,17 +1,5 @@
 [
   {"label": "Istanbul", "value": "Istanbul"},
   {"label": "Ankara", "value": "Ankara"},
-  {"label": "Izmir", "value": "Izmir"},
-  {"label": "Bursa", "value": "Bursa"},
-  {"label": "Adana", "value": "Adana"},
-  {"label": "Gaziantep", "value": "Gaziantep"},
-  {"label": "Antalya", "value": "Antalya"},
-  {"label": "Konya", "value": "Konya"},
-  {"label": "Eskisehir", "value": "Eskisehir"},
-  {"label": "Diyarbakir", "value": "Diyarbakir"},
-  {"label": "Mersin", "value": "Mersin"},
-  {"label": "Kayseri", "value": "Kayseri"},
-  {"label": "Samsun", "value": "Samsun"},
-  {"label": "Denizli", "value": "Denizli"},
-  {"label": "Malatya", "value": "Malatya"}
+  {"label": "Izmir", "value": "Izmir"}
 ]
