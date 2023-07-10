@@ -1,8 +1,9 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
-import {MenuLines} from '../../components/Icons';
+import {Logout, MenuLines} from '../../components/Icons';
 import colors from '../../styles/colors';
 import BottomButtons from '../../components/cards/BottomButtons';
 import HomeSelectionsCard from '../../components/cards/HomeSelectionsCard';
@@ -80,11 +81,16 @@ const Home = ({navigation}) => {
     return formattedDate;
   }
 
+  function handleLogout() {
+    auth().signOut();
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header_container}>
         <MenuLines />
         <Text style={styles.header_text}>Home</Text>
+        <Logout onPress={handleLogout} />
       </View>
       <View style={styles.body}>
         <HomeSelectionsCard />

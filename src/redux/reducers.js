@@ -10,6 +10,8 @@ const initialState = {
   buttonLoading: false,
   availableBusTickets: [],
   selectedBusTicket: {},
+  selectedSeats: [],
+  selectedTicketPrice: 0,
 };
 
 const Slice = createSlice({
@@ -28,6 +30,12 @@ const Slice = createSlice({
     addSelectedBusTicket: (state, action) => {
       state.selectedBusTicket = action.payload;
     },
+    addSelectedSeats: (state, action) => {
+      state.selectedSeats = action.payload;
+    },
+    addSelectedTicketPrice: (state, action) => {
+      state.selectedTicketPrice = action.payload;
+    },
   },
 });
 
@@ -36,5 +44,7 @@ export const {
   changeButtonLoading,
   changeAvailableBusTickets,
   addSelectedBusTicket,
+  addSelectedSeats,
+  addSelectedTicketPrice,
 } = Slice.actions;
 export default Slice.reducer;

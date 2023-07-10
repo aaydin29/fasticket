@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Dimensions, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {showMessage} from 'react-native-flash-message';
@@ -39,7 +39,7 @@ const Schedules = ({navigation}) => {
       <View style={styles.header_container}>
         <Text style={styles.header_text}>Schedules</Text>
       </View>
-      <ScrollView contentContainerStyle={styles.body}>
+      <View style={styles.body}>
         <SchedulesListCard />
         <View style={styles.selections_container}>
           <View style={styles.selections_info_container}>
@@ -55,7 +55,7 @@ const Schedules = ({navigation}) => {
             {availableBusTickets[0]?.departureDate}
           </Text>
         </View>
-      </ScrollView>
+      </View>
       <BottomButtons
         textLeft="Back"
         textRight="Next"
@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     paddingTop: 10,
-    paddingBottom: 30,
   },
   selections_container: {
     alignSelf: 'center',

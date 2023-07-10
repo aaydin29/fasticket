@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import FlashMessage from 'react-native-flash-message';
+import auth from '@react-native-firebase/auth';
 import colors from './styles/colors';
 
 import Login from './Pages/AuthPages/Login';
@@ -27,12 +28,22 @@ const LoginPages = () => {
 };
 
 const Router = () => {
+  const [userSession, setUserSession] = useState();
+  useEffect(() => {
+    auth().onAuthStateChanged(user => {
+      setUserSession(user);
+    });
+  }, []);
+
   return (
     <NavigationContainer>
       <StatusBar backgroundColor={colors.lightGray} barStyle="dark-content" />
       <Stack.Navigator screenOptions={RouterOptions}>
-        <Stack.Screen name="LoginPages" component={LoginPages} />
-        <Stack.Screen name="Home" component={Home} />
+        {!userSession ? (
+          <Stack.Screen name="LoginPages" component={LoginPages} />
+        ) : (
+          <Stack.Screen name="Home" component={Home} />
+        )}
         <Stack.Screen name="Schedules" component={Schedules} />
         <Stack.Screen name="Seats" component={Seats} />
         <Stack.Screen name="Details" component={Details} />

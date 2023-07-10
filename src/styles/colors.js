@@ -8,6 +8,7 @@ const colors = {
   textGray: '#888888',
   darkGray: '#D9D9D9',
   lightBlack: '#121212',
+  seatGray: '#666666',
 };
 
 export default colors;

@@ -4,6 +4,7 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
@@ -44,7 +45,7 @@ const SchedulesListCard = () => {
         <Text style={styles.header_texts}>Seats</Text>
         <Text style={styles.header_texts}>Price</Text>
       </View>
-      <View style={styles.list_body}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {sortedTickets.map(ticket => (
           <TouchableOpacity
             onPress={() => handleSelectTicket(ticket)}
@@ -64,12 +65,12 @@ const SchedulesListCard = () => {
             <Text style={styles.list_item_texts}>{ticket.departureTime}</Text>
             <Text style={styles.list_item_texts}>
               {' '}
-              {ticket.seatCount} / {ticket.availableSeats}
+              {ticket.seatCount} / {ticket.emptySeats}
             </Text>
             <Text style={styles.list_item_texts}> {ticket.ticketPrice}</Text>
           </TouchableOpacity>
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -80,9 +81,9 @@ const deviceSize = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     alignSelf: 'center',
     width: deviceSize.width / 1.2,
+    maxHeight: deviceSize.height / 1.8,
     borderRadius: 10,
     elevation: 5,
     backgroundColor: colors.white,
@@ -110,7 +111,6 @@ const styles = StyleSheet.create({
     color: colors.white,
     flex: 1.4,
   },
-  list_body: {},
   list_item: {
     paddingHorizontal: 20,
     paddingVertical: 15,
