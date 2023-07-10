@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
 import {Formik} from 'formik';
 import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
@@ -9,7 +10,7 @@ import colors from '../../styles/colors';
 import Button from '../../components/Button/Button';
 import AuthCheckbox from '../../components/CheckBox/AuthCheckbox';
 import authErrorMessages from '../../utils/authErrorMessages';
-import Loading from '../../components/Loading/Loading';
+import {changeButtonLoading} from '../../redux/reducers';
 
 const initialFormValues = {
   email: '',
@@ -18,7 +19,7 @@ const initialFormValues = {
 
 const Login = ({navigation}) => {
   const [keyCheckBox, setKeyCheckBox] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   function handleCreatePress() {
     navigation.navigate('Register');
@@ -26,7 +27,7 @@ const Login = ({navigation}) => {
   }
 
   async function handleLogin(formValues) {
-    setLoading(true);
+    dispatch(changeButtonLoading(true));
     try {
       await auth().signInWithEmailAndPassword(
         formValues.email,
@@ -37,7 +38,7 @@ const Login = ({navigation}) => {
         type: 'success',
         floating: true,
       });
-      setLoading(false);
+      dispatch(changeButtonLoading(false));
       navigation.navigate('Home');
     } catch (error) {
       showMessage({
@@ -45,7 +46,7 @@ const Login = ({navigation}) => {
         type: 'danger',
         floating: true,
       });
-      setLoading(false);
+      dispatch(changeButtonLoading(false));
     }
   }
 
@@ -81,11 +82,7 @@ const Login = ({navigation}) => {
                 onValueChange={value => setKeyCheckBox(value)}
                 text="Show password"
               />
-              {loading ? (
-                <Loading />
-              ) : (
-                <Button text="Login" onPress={handleSubmit} />
-              )}
+              <Button text="Login" onPress={handleSubmit} />
             </>
           )}
         </Formik>

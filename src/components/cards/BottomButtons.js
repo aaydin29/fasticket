@@ -5,9 +5,11 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 import React from 'react';
 import colors from '../../styles/colors';
 import {Search} from '../Icons';
+import Loading from '../Loading/Loading';
 
 const BottomButtons = ({
   textLeft,
@@ -16,6 +18,8 @@ const BottomButtons = ({
   onPressLeft,
   onPressRight,
 }) => {
+  const buttonLoading = useSelector(state => state.buttonLoading);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={0.7} onPress={onPressLeft}>
@@ -25,8 +29,14 @@ const BottomButtons = ({
         activeOpacity={0.7}
         onPress={onPressRight}
         style={styles.button_right}>
-        {icon && <Search style={styles.icon} />}
-        <Text style={styles.text_right}>{textRight}</Text>
+        {buttonLoading ? (
+          <Loading />
+        ) : (
+          <>
+            {icon && <Search style={styles.icon} />}
+            <Text style={styles.text_right}>{textRight}</Text>
+          </>
+        )}
       </TouchableOpacity>
     </View>
   );

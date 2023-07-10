@@ -1,14 +1,13 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import FasticketProvider from './redux/Provider';
+import Router from './Router';
 
 const App = () => {
   return (
-    <View>
-      <Text>App</Text>
-    </View>
+    <FasticketProvider>
+      <Router />
+    </FasticketProvider>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({});

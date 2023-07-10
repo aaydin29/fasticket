@@ -1,14 +1,18 @@
 import {StyleSheet, Text, TouchableOpacity, Dimensions} from 'react-native';
 import React from 'react';
+import {useSelector} from 'react-redux';
 import colors from '../../styles/colors';
+import Loading from '../Loading/Loading';
 
 const Button = ({text, onPress, style}) => {
+  const buttonLoading = useSelector(state => state.buttonLoading);
+
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.7}
       style={[styles.container, style]}>
-      <Text style={styles.text}>{text}</Text>
+      {buttonLoading ? <Loading /> : <Text style={styles.text}>{text}</Text>}
     </TouchableOpacity>
   );
 };

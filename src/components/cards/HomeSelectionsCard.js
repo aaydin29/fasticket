@@ -1,26 +1,31 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import Collapsible from 'react-native-collapsible';
-import database from '@react-native-firebase/database';
 import colors from '../../styles/colors';
 import {ArrowCircle} from '../Icons';
 import DropdownCard from './DropdownCard';
 import cities from '../../utils/Cities.json';
 import whoData from '../../utils/whoData.json';
 import DatePicker from 'react-native-date-picker';
+import {changeHomeSelections} from '../../redux/reducers';
 
 const HomeSelectionsCard = () => {
-  const [departureCity, setDepartureCity] = useState('');
-  const [arrivalCity, setArrivalCity] = useState('');
-  const [peopleNumber, setPeopleNumber] = useState('');
-  const [whenDate, setWhenDate] = useState('');
+  const homeSelections = useSelector(state => state.homeSelections);
+  const departureCity = useSelector(
+    state => state.homeSelections.departureCity,
+  );
+  const arrivalCity = useSelector(state => state.homeSelections.arrivalCity);
+  const [whenDate, setWhenDate] = useState(new Date());
+  const peopleNumber = useSelector(state => state.homeSelections.peopleNumber);
   const [collapsibles, setCollapsibles] = useState({
     where: false,
     when: true,
     who: true,
   });
+  const dispatch = useDispatch();
 
-  const handleCollapsiblePress = key => {
+  function handleCollapsiblePress(key) {
     setCollapsibles(prevState => {
       const updatedStates = {
         where: true,
@@ -30,7 +35,21 @@ const HomeSelectionsCard = () => {
       updatedStates[key] = !prevState[key];
       return updatedStates;
     });
-  };
+  }
+
+  function handleSelections(key, value) {
+    if (key === 'whenDate') {
+      setWhenDate(value);
+      dispatch(
+        changeHomeSelections({
+          ...homeSelections,
+          [key]: value.toLocaleDateString(),
+        }),
+      );
+    } else {
+      dispatch(changeHomeSelections({...homeSelections, [key]: value.value}));
+    }
+  }
 
   return (
     <View>
@@ -52,7 +71,7 @@ const HomeSelectionsCard = () => {
             valueField="value"
             value={departureCity}
             data={cities}
-            onChange={value => setDepartureCity(value)}
+            onChange={value => handleSelections('departureCity', value)}
           />
           <DropdownCard
             placeholder={'Arrival City'}
@@ -61,7 +80,7 @@ const HomeSelectionsCard = () => {
             valueField="value"
             value={arrivalCity}
             data={cities}
-            onChange={value => setArrivalCity(value)}
+            onChange={value => handleSelections('arrivalCity', value)}
           />
         </Collapsible>
       </View>
@@ -78,8 +97,8 @@ const HomeSelectionsCard = () => {
           style={styles.collapsible_containers}>
           <DatePicker
             mode="date"
-            date={whenDate === '' ? new Date() : whenDate}
-            onDateChange={date => setWhenDate(date)}
+            date={whenDate}
+            onDateChange={value => handleSelections('whenDate', value)}
             minimumDate={new Date()}
             maximumDate={new Date('2024-01-01')}
           />
@@ -103,7 +122,7 @@ const HomeSelectionsCard = () => {
             valueField="value"
             value={peopleNumber}
             data={whoData}
-            onChange={value => setPeopleNumber(value)}
+            onChange={value => handleSelections('peopleNumber', value)}
           />
         </Collapsible>
       </View>

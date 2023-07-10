@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
 import {showMessage} from 'react-native-flash-message';
 import {Formik} from 'formik';
 import auth from '@react-native-firebase/auth';
@@ -10,7 +11,7 @@ import {Birthday, IdCard, Key, Mail, User} from '../../components/Icons';
 import AuthCheckbox from '../../components/CheckBox/AuthCheckbox';
 import Button from '../../components/Button/Button';
 import authErrorMessages from '../../utils/authErrorMessages';
-import Loading from '../../components/Loading/Loading';
+import {changeButtonLoading} from '../../redux/reducers';
 
 const initialFormValues = {
   username: '',
@@ -23,14 +24,14 @@ const initialFormValues = {
 };
 
 const Register = ({navigation}) => {
-  const [loading, setLoading] = useState(false);
   const [checkboxValues, setCheckboxValues] = useState({
     male: false,
     female: false,
   });
+  const dispatch = useDispatch();
 
   async function handleRegister(formValues) {
-    setLoading(true);
+    dispatch(changeButtonLoading(true));
     const {username, idNo, birthday, email, password, repassword, gender} =
       formValues;
 
@@ -40,7 +41,7 @@ const Register = ({navigation}) => {
         type: 'danger',
         floating: true,
       });
-      setLoading(false);
+      dispatch(changeButtonLoading(false));
       return;
     }
     if (
@@ -59,7 +60,7 @@ const Register = ({navigation}) => {
         type: 'danger',
         floating: true,
       });
-      setLoading(false);
+      dispatch(changeButtonLoading(false));
       return;
     }
     try {
@@ -77,7 +78,7 @@ const Register = ({navigation}) => {
         type: 'success',
         floating: true,
       });
-      setLoading(false);
+      dispatch(changeButtonLoading(false));
       navigation.navigate('Login');
     } catch (error) {
       showMessage({
@@ -85,7 +86,7 @@ const Register = ({navigation}) => {
         type: 'danger',
         floating: true,
       });
-      setLoading(false);
+      dispatch(changeButtonLoading(false));
     }
   }
 
@@ -185,11 +186,7 @@ const Register = ({navigation}) => {
                   text="Female"
                 />
               </View>
-              {loading ? (
-                <Loading />
-              ) : (
-                <Button text="Register" onPress={handleSubmit} />
-              )}
+              <Button text="Register" onPress={handleSubmit} />
             </>
           )}
         </Formik>
