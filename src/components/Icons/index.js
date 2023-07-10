@@ -8,3 +8,4 @@ export {default as Logout} from './Logout';
 export {default as Mail} from './Mail';
 export {default as MenuLines} from './MenuLines';
 export {default as User} from './User';
+export {default as Search} from './Search';
