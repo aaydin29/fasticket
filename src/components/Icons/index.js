@@ -11,3 +11,6 @@ export {default as User} from './User';
 export {default as Search} from './Search';
 export {default as EyeOpen} from './EyeOpen';
 export {default as EyeClose} from './EyeClose';
+export {default as Home} from './Home';
+export {default as Ticket} from './Ticket';
+export {default as Feedback} from './Feedback';

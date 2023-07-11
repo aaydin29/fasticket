@@ -1,9 +1,8 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
-import {Logout, MenuLines} from '../../components/Icons';
+import {MenuLines} from '../../components/Icons';
 import colors from '../../styles/colors';
 import BottomButtons from '../../components/cards/BottomButtons';
 import HomeSelectionsCard from '../../components/cards/HomeSelectionsCard';
@@ -12,10 +11,11 @@ import {
   changeAvailableBusTickets,
   changeButtonLoading,
   changeHomeSelections,
-  changeRememberMe,
 } from '../../redux/reducers';
+import MenuModal from '../../components/modals/MenuModal';
 
 const Home = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const homeSelections = useSelector(state => state.homeSelections);
   const dispatch = useDispatch();
 
@@ -82,17 +82,15 @@ const Home = ({navigation}) => {
     return formattedDate;
   }
 
-  function handleLogout() {
-    auth().signOut();
-    dispatch(changeRememberMe(false));
+  function handleMenuPress() {
+    setModalVisible(!modalVisible);
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.header_container}>
-        <MenuLines />
+        <MenuLines onPress={handleMenuPress} />
         <Text style={styles.header_text}>Home</Text>
-        <Logout onPress={handleLogout} />
       </View>
       <View style={styles.body}>
         <HomeSelectionsCard />
@@ -104,6 +102,11 @@ const Home = ({navigation}) => {
           icon
         />
       </View>
+      <MenuModal
+        isVisible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        navigation={navigation}
+      />
     </View>
   );
 };
@@ -127,7 +130,7 @@ const styles = StyleSheet.create({
     color: colors.lightBlack,
     flex: 1,
     textAlign: 'center',
-    marginLeft: -25,
+    marginRight: 20,
   },
   body: {
     flex: 1,

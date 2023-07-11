@@ -15,6 +15,7 @@ import Seats from './Pages/StackPages/Seats';
 import Details from './Pages/StackPages/Details';
 import Payment from './Pages/StackPages/Payment';
 import PaymentSuccess from './Pages/StackPages/PaymentSuccess';
+import MyTickets from './Pages/StackPages/MyTickets';
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,7 @@ const Router = () => {
         <Stack.Screen name="Details" component={Details} />
         <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen name="PaymentSuccess" component={PaymentSuccess} />
+        <Stack.Screen name="MyTickets" component={MyTickets} />
       </Stack.Navigator>
       <FlashMessage position="top" />
     </NavigationContainer>
