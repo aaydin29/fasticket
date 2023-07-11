@@ -5,10 +5,9 @@ import {Formik} from 'formik';
 import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
 import AuthInput from '../../components/Input/AuthInput';
-import {Key, Mail} from '../../components/Icons';
+import {EyeClose, EyeOpen, Mail} from '../../components/Icons';
 import colors from '../../styles/colors';
 import Button from '../../components/Button/Button';
-import AuthCheckbox from '../../components/CheckBox/AuthCheckbox';
 import authErrorMessages from '../../utils/authErrorMessages';
 import {changeButtonLoading} from '../../redux/reducers';
 
@@ -71,16 +70,16 @@ const Login = ({navigation}) => {
               />
               <AuthInput
                 placeholder="Password"
-                icon={<Key />}
+                icon={
+                  keyCheckBox === false ? (
+                    <EyeClose onPress={() => setKeyCheckBox(true)} />
+                  ) : (
+                    <EyeOpen onPress={() => setKeyCheckBox(false)} />
+                  )
+                }
                 value={values.password}
                 secureTextEntry={keyCheckBox ? false : true}
                 onChangeText={handleChange('password')}
-              />
-              <AuthCheckbox
-                style={styles.checkbox}
-                value={keyCheckBox}
-                onValueChange={value => setKeyCheckBox(value)}
-                text="Show password"
               />
               <Button text="Login" onPress={handleSubmit} />
             </>

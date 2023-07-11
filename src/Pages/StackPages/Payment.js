@@ -11,7 +11,7 @@ const Payment = ({navigation}) => {
   const paymentInfo = useSelector(state => state.paymentInfo);
 
   function handleBuy() {
-    const {holderName, cardNumber, expiryDate, cvv} = paymentInfo;
+    const {holderName, cardNumber, expiryDate, cvv, isNumberTrue} = paymentInfo;
     if (
       holderName === '' ||
       cardNumber === '' ||
@@ -24,6 +24,12 @@ const Payment = ({navigation}) => {
         floating: true,
       });
       return;
+    } else if (isNumberTrue === false) {
+      showMessage({
+        message: 'Please enter the card number correctly!',
+        type: 'warning',
+        floating: true,
+      });
     } else {
       navigation.navigate('PaymentSuccess');
     }

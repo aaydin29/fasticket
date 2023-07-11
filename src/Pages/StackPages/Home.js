@@ -12,6 +12,7 @@ import {
   changeAvailableBusTickets,
   changeButtonLoading,
   changeHomeSelections,
+  changeRememberMe,
 } from '../../redux/reducers';
 
 const Home = ({navigation}) => {
@@ -83,6 +84,7 @@ const Home = ({navigation}) => {
 
   function handleLogout() {
     auth().signOut();
+    dispatch(changeRememberMe(false));
   }
 
   return (

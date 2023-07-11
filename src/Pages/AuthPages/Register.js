@@ -7,7 +7,14 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import colors from '../../styles/colors';
 import AuthInput from '../../components/Input/AuthInput';
-import {Birthday, IdCard, Key, Mail, User} from '../../components/Icons';
+import {
+  Birthday,
+  EyeClose,
+  EyeOpen,
+  IdCard,
+  Mail,
+  User,
+} from '../../components/Icons';
 import AuthCheckbox from '../../components/CheckBox/AuthCheckbox';
 import Button from '../../components/Button/Button';
 import authErrorMessages from '../../utils/authErrorMessages';
@@ -24,6 +31,7 @@ const initialFormValues = {
 };
 
 const Register = ({navigation}) => {
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
   const [checkboxValues, setCheckboxValues] = useState({
     male: false,
     female: false,
@@ -114,6 +122,10 @@ const Register = ({navigation}) => {
     setFieldValue('birthday', formattedDate);
   }
 
+  function handlePasswordVisibility() {
+    setPasswordVisible(prevState => !prevState);
+  }
+
   function handleLoginPress() {
     navigation.navigate('Login');
   }
@@ -156,15 +168,27 @@ const Register = ({navigation}) => {
               />
               <AuthInput
                 placeholder="Password"
-                icon={<Key />}
-                secureTextEntry
+                icon={
+                  isPasswordVisible ? (
+                    <EyeOpen onPress={handlePasswordVisibility} />
+                  ) : (
+                    <EyeClose onPress={handlePasswordVisibility} />
+                  )
+                }
+                secureTextEntry={!isPasswordVisible}
                 value={values.password}
                 onChangeText={handleChange('password')}
               />
               <AuthInput
                 placeholder="Confirm Password"
-                icon={<Key />}
-                secureTextEntry
+                icon={
+                  isPasswordVisible ? (
+                    <EyeOpen onPress={handlePasswordVisibility} />
+                  ) : (
+                    <EyeClose onPress={handlePasswordVisibility} />
+                  )
+                }
+                secureTextEntry={!isPasswordVisible}
                 value={values.repassword}
                 onChangeText={handleChange('repassword')}
               />
