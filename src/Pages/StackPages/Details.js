@@ -126,8 +126,9 @@ const styles = StyleSheet.create({
   },
   info_top_container: {
     borderRadius: 5,
-    padding: 20,
-    borderBottomWidth: 1.5,
+    padding: 10,
+    paddingVertical: 20,
+    borderBottomWidth: 1,
     borderColor: colors.darkGray,
   },
   cities_container: {
@@ -143,9 +144,8 @@ const styles = StyleSheet.create({
   date_container: {
     alignItems: 'center',
     justifyContent: 'space-around',
-    marginTop: 10,
+    marginTop: 15,
   },
-
   date_text: {
     fontFamily: 'Montserrat-Medium',
     color: colors.green,
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   time_text: {
     fontFamily: 'Montserrat-Medium',
     fontSize: 18,
-    marginTop: 5,
+    marginTop: 10,
     color: colors.lightBlack,
   },
   user_ticket_info_container: {
