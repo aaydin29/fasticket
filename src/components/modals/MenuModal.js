@@ -15,12 +15,11 @@ const MenuModal = ({isVisible, onClose, navigation}) => {
     navigationState.routes[currentIndex].name === 'MyTickets';
 
   function handleLogout() {
+    onClose();
     if (auth().currentUser) {
-      onClose();
       auth().signOut();
-      console.log('ÇIKIS YAPILDI');
     } else {
-      console.log('KULLANICI BULUNAMADI');
+      console.log('Logout error.');
     }
   }
 

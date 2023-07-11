@@ -156,6 +156,7 @@ const Register = ({navigation}) => {
               <AuthInput
                 placeholder="Birthday dd/mm/yyyy"
                 maxLength={10}
+                keyboardType="numeric"
                 icon={<Birthday />}
                 value={values.birthday}
                 onChangeText={text => onChangeText(text, setFieldValue)}

@@ -20,7 +20,7 @@ const initialState = {
     isNumberTrue: false,
     totalPrice: '',
   },
-  myTickets: {},
+  myTickets: [],
   userInfo: {},
 };
 

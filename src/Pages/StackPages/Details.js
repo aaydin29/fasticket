@@ -1,15 +1,39 @@
 import {StyleSheet, Text, View, Dimensions} from 'react-native';
-import React from 'react';
-import {useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 import BottomButtons from '../../components/cards/BottomButtons';
 import colors from '../../styles/colors';
 import {ArrowFull} from '../../components/Icons';
+import {addUserInfo} from '../../redux/reducers';
 
 const Details = ({navigation}) => {
   const selectedBusTicket = useSelector(state => state.selectedBusTicket);
   const selectedSeats = useSelector(state => state.selectedSeats);
   const selectedTicketPrice = useSelector(state => state.selectedTicketPrice);
   const userInfo = useSelector(state => state.userInfo);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userId = auth().currentUser.uid;
+        const snapshot = await database().ref(`users/${userId}/`).once('value');
+        const data = snapshot.val();
+        if (data) {
+          dispatch(addUserInfo(data));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (Object.keys(userInfo).length === 0) {
+      fetchUserData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleBack() {
     navigation.goBack();

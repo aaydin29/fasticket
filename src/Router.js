@@ -38,7 +38,7 @@ const Router = () => {
 
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor={colors.lightGray} barStyle="dark-content" />
+      <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
       <Stack.Navigator screenOptions={RouterOptions}>
         {!userSession ? (
           <Stack.Screen name="LoginPages" component={LoginPages} />

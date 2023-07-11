@@ -2,14 +2,25 @@ import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {showMessage} from 'react-native-flash-message';
+import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 import colors from '../../styles/colors';
 import BottomButtons from '../../components/cards/BottomButtons';
 import SuccessMessageCard from '../../components/cards/SuccessMessageCard';
-import {addMyTickets} from '../../redux/reducers';
+import {
+  addMyTickets,
+  addSelectedBusTicket,
+  addSelectedSeats,
+  addSelectedTicketPrice,
+  changeAvailableBusTickets,
+  changeHomeSelections,
+  changePaymentInfo,
+} from '../../redux/reducers';
 
 const PaymentSuccess = ({navigation}) => {
   const selectedBusTicket = useSelector(state => state.selectedBusTicket);
   const selectedSeats = useSelector(state => state.selectedSeats);
+  const myTickets = useSelector(state => state.myTickets);
   const paymentInfo = useSelector(state => state.paymentInfo);
   const dispatch = useDispatch();
 
@@ -17,20 +28,51 @@ const PaymentSuccess = ({navigation}) => {
     return Math.random().toString(36).substring(2, 10);
   }
 
-  function handleBackToHome() {
+  async function handleBackToHome() {
     const id = generateRandomId();
+    const newTicket = {
+      ticketId: id,
+      company: selectedBusTicket.companyName,
+      departureCity: selectedBusTicket.departureCity,
+      arrivalCity: selectedBusTicket.arrivalCity,
+      departureDate: selectedBusTicket.departureDate,
+      departureTime: selectedBusTicket.departureTime,
+      busNumber: selectedBusTicket.busNumber,
+      selectedSeats: selectedSeats,
+      totalPrice: paymentInfo.totalPrice,
+      holderName: paymentInfo.holderName,
+    };
+    dispatch(addMyTickets([...myTickets, newTicket]));
+
+    try {
+      const userId = auth().currentUser.uid;
+      await database()
+        .ref(`users/${userId}/myTickets`)
+        .set([...myTickets, newTicket]);
+    } catch (error) {
+      console.log(error);
+    }
+
     dispatch(
-      addMyTickets({
-        tickedId: id,
-        company: selectedBusTicket.companyName,
-        departureCity: selectedBusTicket.departureCity,
-        arrivalCity: selectedBusTicket.arrivalCity,
-        departureDate: selectedBusTicket.departureDate,
-        departureTime: selectedBusTicket.departureTime,
-        busNumber: selectedBusTicket.busNumber,
-        selectedSeats: selectedSeats,
-        totalPrice: paymentInfo.totalPrice,
-        holderName: paymentInfo.holderName,
+      changeHomeSelections({
+        departureCity: '',
+        arrivalCity: '',
+        peopleNumber: '',
+        whenDate: '',
+      }),
+    );
+    dispatch(changeAvailableBusTickets([]));
+    dispatch(addSelectedBusTicket({}));
+    dispatch(addSelectedSeats([]));
+    dispatch(addSelectedTicketPrice(0));
+    dispatch(
+      changePaymentInfo({
+        holderName: '',
+        cardNumber: '',
+        expiryDate: '',
+        cvv: '',
+        isNumberTrue: false,
+        totalPrice: '',
       }),
     );
     navigation.navigate('Home');

@@ -17,6 +17,7 @@ import MenuModal from '../../components/modals/MenuModal';
 const Home = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const homeSelections = useSelector(state => state.homeSelections);
+
   const dispatch = useDispatch();
 
   function handleClear() {
@@ -119,7 +120,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGray,
   },
   header_container: {
-    height: 80,
+    height: 70,
+    backgroundColor: colors.white,
+    elevation: 5,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 25,
@@ -134,6 +137,6 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: 30,
   },
 });
