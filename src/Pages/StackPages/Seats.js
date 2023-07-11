@@ -1,30 +1,46 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {showMessage} from 'react-native-flash-message';
 import colors from '../../styles/colors';
 import SeatSelectCard from '../../components/cards/SeatSelectCard';
 import BottomButtons from '../../components/cards/BottomButtons';
 import {addSelectedSeats} from '../../redux/reducers';
 
 const Seats = ({navigation}) => {
+  const selectedSeats = useSelector(state => state.selectedSeats);
   const dispatch = useDispatch();
+
   function handleBack() {
     navigation.goBack();
     dispatch(addSelectedSeats([]));
   }
+
+  function handleNext() {
+    if (selectedSeats.length === 0) {
+      showMessage({
+        message: "You can't continue without selecting a seat!",
+        type: 'danger',
+        floating: true,
+      });
+    } else {
+      navigation.navigate('Details');
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header_container}>
         <Text style={styles.header_text}>Seats</Text>
       </View>
-      <View style={styles.body}>
+      <ScrollView contentContainerStyle={styles.body}>
         <SeatSelectCard />
-      </View>
+      </ScrollView>
       <BottomButtons
         textLeft="Back"
         textRight="Next"
         onPressLeft={handleBack}
-        // onPressRight={handleNext}
+        onPressRight={handleNext}
       />
     </View>
   );
@@ -49,6 +65,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   body: {
-    flex: 1,
+    paddingBottom: 100,
   },
 });
