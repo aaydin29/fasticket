@@ -112,7 +112,6 @@ const HomeSelectionsCard = () => {
             mode="date"
             date={whenDate}
             onDateChange={value => handleSelections('whenDate', value)}
-            minimumDate={startOfDay(new Date())}
             maximumDate={startOfDay(new Date('2024-01-01'))}
           />
         </Collapsible>

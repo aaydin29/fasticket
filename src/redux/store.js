@@ -15,7 +15,7 @@ import rootReducer from './reducers';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [],
+  whitelist: ['myTickets', 'userInfo'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

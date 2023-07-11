@@ -142,7 +142,7 @@ const Register = ({navigation}) => {
                 onChangeText={handleChange('idNo')}
               />
               <AuthInput
-                placeholder="Birthday dd/mm/yy"
+                placeholder="Birthday dd/mm/yyyy"
                 maxLength={10}
                 icon={<Birthday />}
                 value={values.birthday}

@@ -1,33 +1,15 @@
 import {StyleSheet, Text, View, Dimensions} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {useSelector} from 'react-redux';
-import auth from '@react-native-firebase/auth';
-import database from '@react-native-firebase/database';
 import BottomButtons from '../../components/cards/BottomButtons';
 import colors from '../../styles/colors';
 import {ArrowFull} from '../../components/Icons';
 
 const Details = ({navigation}) => {
-  const [userInfo, setUserInfo] = useState(null);
   const selectedBusTicket = useSelector(state => state.selectedBusTicket);
   const selectedSeats = useSelector(state => state.selectedSeats);
   const selectedTicketPrice = useSelector(state => state.selectedTicketPrice);
-
-  useEffect(() => {
-    try {
-      const userId = auth().currentUser.uid;
-      database()
-        .ref(`users/${userId}/`)
-        .on('value', snapshot => {
-          const data = snapshot.val();
-          if (data) {
-            setUserInfo(data);
-          }
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const userInfo = useSelector(state => state.userInfo);
 
   function handleBack() {
     navigation.goBack();
@@ -67,7 +49,9 @@ const Details = ({navigation}) => {
               <Text style={styles.titles_texts}>Full Name</Text>
               <Text style={styles.titles_texts}>ID Number</Text>
               <Text style={styles.titles_texts}>Company</Text>
-              <Text style={styles.titles_texts}>Seat Number</Text>
+              <Text style={styles.titles_texts}>
+                {selectedSeats.length > 1 ? 'Seat Numbers' : 'Seat Number'}
+              </Text>
               <Text style={styles.titles_texts}>Ticket Price</Text>
             </View>
             <View style={styles.infos_container}>

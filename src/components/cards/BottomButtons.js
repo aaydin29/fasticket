@@ -17,6 +17,7 @@ const BottomButtons = ({
   icon,
   onPressLeft,
   onPressRight,
+  buttonRightStyle,
 }) => {
   const buttonLoading = useSelector(state => state.buttonLoading);
 
@@ -28,7 +29,7 @@ const BottomButtons = ({
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={onPressRight}
-        style={styles.button_right}>
+        style={[styles.button_right, buttonRightStyle]}>
         {buttonLoading ? (
           <Loading />
         ) : (

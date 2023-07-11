@@ -17,7 +17,11 @@ const initialState = {
     cardNumber: '',
     expiryDate: '',
     cvv: '',
+    isNumberTrue: false,
+    totalPrice: '',
   },
+  myTickets: {},
+  userInfo: {},
 };
 
 const Slice = createSlice({
@@ -45,6 +49,12 @@ const Slice = createSlice({
     changePaymentInfo: (state, action) => {
       state.paymentInfo = action.payload;
     },
+    addMyTickets: (state, action) => {
+      state.myTickets = action.payload;
+    },
+    addUserInfo: (state, action) => {
+      state.userInfo = action.payload;
+    },
   },
 });
 
@@ -56,5 +66,7 @@ export const {
   addSelectedSeats,
   addSelectedTicketPrice,
   changePaymentInfo,
+  addMyTickets,
+  addUserInfo,
 } = Slice.actions;
 export default Slice.reducer;

@@ -6,23 +6,54 @@ import {
   TextInput,
   Dimensions,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import colors from '../../styles/colors';
 import {CheckCircle} from '../Icons';
 import {changePaymentInfo} from '../../redux/reducers';
 
 const PaymentCard = () => {
-  const [isNumberTrue, setIsNumberTrue] = useState(false);
   const selectedBusTicket = useSelector(state => state.selectedBusTicket);
   const ticketPrice = useSelector(state => state.selectedTicketPrice);
-  const taxPrice = selectedBusTicket.taxPrice;
+  const taxPrice = selectedBusTicket.taxPrice.replace('$', '');
   const paymentInfo = useSelector(state => state.paymentInfo);
   const dispatch = useDispatch();
 
   function handleWrite(key, value) {
-    dispatch(changePaymentInfo({...paymentInfo, [key]: value}));
+    let updatedValue = value;
+
+    if (key === 'cardNumber') {
+      value = value.replace(/\s/g, '');
+      value = value.replace(/\d{4}(?=.)/g, '$& ');
+      const isNumberTrue = updatedValue.length === 19;
+      dispatch(
+        changePaymentInfo({
+          ...paymentInfo,
+          cardNumber: value,
+          isNumberTrue,
+        }),
+      );
+    } else if (key === 'expiryDate') {
+      const formattedValue = value.replace(/\D/g, '');
+
+      if (formattedValue.length <= 2) {
+        updatedValue = formattedValue;
+      } else {
+        const month = formattedValue.slice(0, 2);
+        const year = formattedValue.slice(2);
+        updatedValue = `${month}/${year}`;
+      }
+      dispatch(changePaymentInfo({...paymentInfo, [key]: updatedValue}));
+    } else {
+      dispatch(changePaymentInfo({...paymentInfo, [key]: updatedValue}));
+    }
   }
+
+  useEffect(() => {
+    const total = Number(ticketPrice) + Number(taxPrice);
+    dispatch(changePaymentInfo({...paymentInfo, totalPrice: total}));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ticketPrice, taxPrice]);
 
   return (
     <View style={styles.container}>
@@ -44,9 +75,12 @@ const PaymentCard = () => {
               style={styles.card_number_input}
               maxLength={19}
               keyboardType="numeric"
+              value={paymentInfo.cardNumber}
               onChangeText={value => handleWrite('cardNumber', value)}
             />
-            {isNumberTrue && <CheckCircle style={styles.check_icon} />}
+            {paymentInfo.isNumberTrue && (
+              <CheckCircle style={styles.check_icon} />
+            )}
           </View>
         </View>
         <View style={styles.date_cvv_container}>
@@ -54,6 +88,9 @@ const PaymentCard = () => {
             <Text style={styles.date_text}>Expiry Date</Text>
             <TextInput
               style={styles.date_input}
+              maxLength={5}
+              value={paymentInfo.expiryDate}
+              keyboardType="numeric"
               onChangeText={value => handleWrite('expiryDate', value)}
             />
           </View>
@@ -62,6 +99,7 @@ const PaymentCard = () => {
             <TextInput
               style={styles.cvv_input}
               maxLength={3}
+              keyboardType="numeric"
               onChangeText={value => handleWrite('cvv', value)}
             />
           </View>
@@ -80,7 +118,9 @@ const PaymentCard = () => {
         </View>
         <View style={styles.price_bottom_container}>
           <Text style={styles.total_amount_texts}>Total Amount</Text>
-          <Text style={styles.total_amount_texts}>TOTAL PRICE</Text>
+          <Text style={styles.total_amount_texts}>
+            ${paymentInfo.totalPrice}
+          </Text>
         </View>
       </View>
     </View>
