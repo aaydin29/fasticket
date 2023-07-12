@@ -1,79 +1,85 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Fasticket - React Native Bus Ticket Buying App
 
-# Getting Started
+Fasticket is a React Native mobile application that allows users to register, log in, purchase bus tickets with their own information, and view their purchased tickets.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## App Video
+https://github.com/aaydin29/fasticket/assets/118750784/911025e3-d8d8-4c33-9ac5-6d051b74d01d
 
-## Step 1: Start the Metro Server
+_____________________________________________________
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### Guide
+- Bus ticket data available on 11-12-13 of July 2023. Please choose between these dates to see the results!
+- Most ticket results come from Istanbul to Ankara. You can select these cities for more results.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+_____________________________________________________
 
-```bash
-# using npm
-npm start
+# Installation
+## Requirements
+- Node.js
+- React Native CLI
+- Development environments for iOS and/or Android (Xcode, Android Studio)
 
-# OR using Yarn
-yarn start
-```
+## Installing Project Dependencies
+1- Clone this repository to a local directory:
+~~~ 
+git clone https://github.com/aaydin29/fasticket.git 
+~~~
+2- Navigate to the project directory:
+~~~
+cd fasticket
+~~~
+3- Install the required dependencies by running the following command:
+~~~
+npm install
+~~~
 
-## Step 2: Start your Application
+## Running the Application
+### For iOS:
+~~~
+npx react-native run-ios
+~~~
+### For Android:
+~~~
+npx react-native run-android
+~~~
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+_____________________________________________________
 
-### For Android
+# Contributing
+If you would like to contribute to Fasticket, you can follow the steps below:
 
-```bash
-# using npm
-npm run android
+### Creating a Branch
+1- Update the main branch to get the latest updates from the main repository:
+~~~
+git checkout main
+git pull
+~~~
 
-# OR using Yarn
-yarn android
-```
+2- Create a new branch and switch to it:
+~~~
+git checkout -b new-feature
+~~~
 
-### For iOS
+### Making Changes
 
-```bash
-# using npm
-npm run ios
+1- Make the necessary changes in your code editor and test them.
+2- Commit your changes:
 
-# OR using Yarn
-yarn ios
-```
+~~~
+git add .
+git commit -m "Add new feature: Description"
+~~~
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+### Sending a Pull Request
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+1- Push the branch you created to the remote server:
+~~~
+git push origin new-feature
+~~~
+2- Go to the GitHub repository and click on the "Compare & pull request" button.
+3- Create and submit a pull request that explains your changes.
 
-## Step 3: Modifying your App
+_____________________________________________________
 
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
