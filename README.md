@@ -1,9 +1,14 @@
-# Fasticket - React Native Bus Ticket Buying App
+# Fasticket - React Native Bus Ticket Purchase App
 
 Fasticket is a React Native mobile application that allows users to register, log in, purchase bus tickets with their own information, and view their purchased tickets.
 
 ## App Video
-https://github.com/aaydin29/fasticket/assets/118750784/911025e3-d8d8-4c33-9ac5-6d051b74d01d
+
+For high resolution Youtube = https://youtu.be/EKWcDopFebs
+
+https://github.com/aaydin29/fasticket/assets/118750784/c36bd710-43bf-4609-999d-a8b17a34d376
+
+
 
 _____________________________________________________
 
@@ -16,7 +21,7 @@ _____________________________________________________
 # Installation
 ## Requirements
 - Node.js
-- React Native CLI
+- React Native CLI (0.72.1)
 - Development environments for iOS and/or Android (Xcode, Android Studio)
 
 ## Installing Project Dependencies
