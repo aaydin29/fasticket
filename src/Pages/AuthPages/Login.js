@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, StatusBar} from 'react-native';
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Formik} from 'formik';
@@ -51,6 +51,7 @@ const Login = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor={colors.lightGray} barStyle="dark-content" />
       <View style={styles.header_container}>
         <Text style={styles.header_text}>Login</Text>
       </View>
@@ -104,7 +105,8 @@ const styles = StyleSheet.create({
   },
   header_container: {
     backgroundColor: colors.lightGray,
-    height: 65,
+    height: 60,
+    elevation: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },

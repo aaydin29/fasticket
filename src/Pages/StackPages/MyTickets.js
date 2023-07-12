@@ -4,6 +4,7 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
@@ -50,7 +51,9 @@ const MyTickets = ({navigation}) => {
         <MenuLines onPress={handleMenuPress} />
         <Text style={styles.header_text}>My Tickets</Text>
       </View>
-      <View style={styles.body}>
+      <ScrollView
+        contentContainerStyle={styles.body}
+        showsVerticalScrollIndicator={false}>
         {myTickets.length === 0 ? (
           <Text style={styles.no_ticket_text}>No tickets have been found!</Text>
         ) : (
@@ -94,7 +97,7 @@ const MyTickets = ({navigation}) => {
             </View>
           ))
         )}
-      </View>
+      </ScrollView>
       <TouchableOpacity
         style={styles.delete_container}
         activeOpacity={0.7}
@@ -121,7 +124,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header_container: {
-    height: 80,
+    height: 60,
     backgroundColor: colors.white,
     elevation: 5,
     flexDirection: 'row',
@@ -137,8 +140,8 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   body: {
-    flex: 1,
-    paddingTop: 20,
+    paddingTop: 30,
+    paddingBottom: 80,
     alignItems: 'center',
   },
   no_ticket_text: {

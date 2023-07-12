@@ -18,7 +18,7 @@ const SeatSelectCard = () => {
   const [userGender, setUserGender] = useState('');
   const selectedBusTicket = useSelector(state => state.selectedBusTicket);
   const selectedSeats = useSelector(state => state.selectedSeats);
-  const currentTicketPrice = selectedBusTicket.ticketPrice.replace('$', '');
+  const currentTicketPrice = selectedBusTicket?.ticketPrice?.replace('$', '');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -123,16 +123,16 @@ const SeatSelectCard = () => {
   };
 
   const renderSeat = seatNumber => {
-    const isSelected = selectedSeats.includes(seatNumber);
+    const isSelected = selectedSeats?.includes(seatNumber);
 
-    const isGenderMale = selectedBusTicket.reservedByMan.includes(seatNumber);
+    const isGenderMale = selectedBusTicket?.reservedByMan?.includes(seatNumber);
     const isGenderFemale =
-      selectedBusTicket.reservedByWoman.includes(seatNumber);
+      selectedBusTicket?.reservedByWoman?.includes(seatNumber);
 
     const isReserved =
-      selectedBusTicket.reservedSeats.includes(seatNumber) ||
-      selectedBusTicket.reservedByWoman.includes(seatNumber) ||
-      selectedBusTicket.reservedByMan.includes(seatNumber);
+      selectedBusTicket?.reservedSeats?.includes(seatNumber) ||
+      selectedBusTicket?.reservedByWoman?.includes(seatNumber) ||
+      selectedBusTicket?.reservedByMan?.includes(seatNumber);
 
     let seatStyle = styles.seat;
     if (isSelected) {

@@ -15,7 +15,7 @@ import {changePaymentInfo} from '../../redux/reducers';
 const PaymentCard = () => {
   const selectedBusTicket = useSelector(state => state.selectedBusTicket);
   const ticketPrice = useSelector(state => state.selectedTicketPrice);
-  const taxPrice = selectedBusTicket.taxPrice.replace('$', '');
+  const taxPrice = selectedBusTicket?.taxPrice?.replace('$', '');
   const paymentInfo = useSelector(state => state.paymentInfo);
   const dispatch = useDispatch();
 
@@ -65,6 +65,7 @@ const PaymentCard = () => {
           <Text style={styles.name_text}>Card Holder Name</Text>
           <TextInput
             style={styles.name_input}
+            maxLength={20}
             onChangeText={value => handleWrite('holderName', value)}
           />
         </View>

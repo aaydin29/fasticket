@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGray,
   },
   header_container: {
-    height: 70,
+    height: 60,
     backgroundColor: colors.white,
     elevation: 5,
     flexDirection: 'row',

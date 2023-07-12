@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
+import {StyleSheet, Text, View, Dimensions, StatusBar} from 'react-native';
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {showMessage} from 'react-native-flash-message';
@@ -132,6 +132,7 @@ const Register = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor={colors.lightGray} barStyle="dark-content" />
       <View style={styles.header_container}>
         <Text style={styles.header_text}>Register</Text>
       </View>
@@ -236,7 +237,7 @@ const styles = StyleSheet.create({
   },
   header_container: {
     backgroundColor: colors.lightGray,
-    height: 65,
+    height: 60,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -64,7 +64,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGray,
   },
   header_container: {
-    height: 80,
+    height: 60,
+    backgroundColor: colors.white,
+    elevation: 5,
     paddingHorizontal: 25,
     justifyContent: 'center',
   },
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: 25,
     paddingBottom: 50,
     alignItems: 'center',
   },

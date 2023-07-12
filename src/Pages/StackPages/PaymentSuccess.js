@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, StatusBar} from 'react-native';
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {showMessage} from 'react-native-flash-message';
@@ -88,6 +88,7 @@ const PaymentSuccess = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor={colors.lightGray} barStyle="dark-content" />
       <View style={styles.body}>
         <SuccessMessageCard />
       </View>
