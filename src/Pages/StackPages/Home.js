@@ -2,17 +2,18 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {showMessage} from 'react-native-flash-message';
-import {MenuLines} from '../../components/Icons';
+
 import colors from '../../styles/colors';
+import {MenuLines} from '../../components/Icons';
 import BottomButtons from '../../components/cards/BottomButtons';
 import HomeSelectionsCard from '../../components/cards/HomeSelectionsCard';
 import ticketsData from '../../utils/ticketData.json';
+import MenuModal from '../../components/modals/MenuModal';
 import {
   changeAvailableBusTickets,
   changeButtonLoading,
   changeHomeSelections,
 } from '../../redux/reducers';
-import MenuModal from '../../components/modals/MenuModal';
 
 const Home = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -48,6 +49,7 @@ const Home = ({navigation}) => {
       dispatch(changeButtonLoading(false));
     } else {
       try {
+        // According to the selected information, it filters the matching tickets from ticketsData and adds them to the required state.
         const formattedWhenDate = formatDate(homeSelections.whenDate);
         const filteredTickets = ticketsData.filter(
           ticket =>

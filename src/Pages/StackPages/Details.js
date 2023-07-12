@@ -3,8 +3,9 @@ import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
-import BottomButtons from '../../components/cards/BottomButtons';
+
 import colors from '../../styles/colors';
+import BottomButtons from '../../components/cards/BottomButtons';
 import {ArrowFull} from '../../components/Icons';
 import {addUserInfo} from '../../redux/reducers';
 
@@ -17,6 +18,7 @@ const Details = ({navigation}) => {
 
   useEffect(() => {
     const fetchUserData = async () => {
+      // It fetch user information from database and adds it to redux userInfo state.
       try {
         const userId = auth().currentUser.uid;
         const snapshot = await database().ref(`users/${userId}/`).once('value');
@@ -29,9 +31,7 @@ const Details = ({navigation}) => {
       }
     };
 
-    if (Object.keys(userInfo).length === 0) {
-      fetchUserData();
-    }
+    fetchUserData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -2,6 +2,7 @@ import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import Lottie from 'lottie-react-native';
+
 import {ArrowFull} from '../Icons';
 import colors from '../../styles/colors';
 

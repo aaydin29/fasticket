@@ -7,9 +7,10 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import React from 'react';
+
 import colors from '../../styles/colors';
-import {Search} from '../Icons';
 import Loading from '../Loading/Loading';
+import {Search} from '../Icons';
 
 const BottomButtons = ({
   textLeft,

@@ -4,13 +4,14 @@ import {useSelector} from 'react-redux';
 import {showMessage} from 'react-native-flash-message';
 
 import BottomButtons from '../../components/cards/BottomButtons';
-import colors from '../../styles/colors';
 import PaymentCard from '../../components/cards/PaymentCard';
+import colors from '../../styles/colors';
 
 const Payment = ({navigation}) => {
   const paymentInfo = useSelector(state => state.paymentInfo);
 
   function handleBuy() {
+    // It checks whether the required fields are filled before buying.
     const {holderName, cardNumber, expiryDate, cvv, isNumberTrue} = paymentInfo;
     if (
       holderName === '' ||

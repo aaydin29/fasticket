@@ -2,31 +2,33 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import Collapsible from 'react-native-collapsible';
+import {format, startOfDay} from 'date-fns';
+import DatePicker from 'react-native-date-picker';
+
 import colors from '../../styles/colors';
 import {ArrowCircle} from '../Icons';
 import DropdownCard from './DropdownCard';
 import cities from '../../utils/Cities.json';
 import whoData from '../../utils/whoData.json';
-import DatePicker from 'react-native-date-picker';
 import {changeHomeSelections} from '../../redux/reducers';
-import {format, startOfDay} from 'date-fns';
 
 const HomeSelectionsCard = () => {
+  const dispatch = useDispatch();
   const homeSelections = useSelector(state => state.homeSelections);
-  const departureCity = useSelector(
-    state => state.homeSelections.departureCity,
-  );
   const arrivalCity = useSelector(state => state.homeSelections.arrivalCity);
   const [whenDate, setWhenDate] = useState(new Date());
   const peopleNumber = useSelector(state => state.homeSelections.peopleNumber);
+  const departureCity = useSelector(
+    state => state.homeSelections.departureCity,
+  );
   const [collapsibles, setCollapsibles] = useState({
     where: false,
     when: true,
     who: true,
   });
-  const dispatch = useDispatch();
 
   function handleCollapsiblePress(key) {
+    // It prevents two collapsibles from opening at the same time.
     setCollapsibles(prevState => {
       const updatedStates = {
         where: true,
@@ -39,6 +41,7 @@ const HomeSelectionsCard = () => {
   }
 
   function handleSelections(key, value) {
+    // Converts the date to the required format.
     if (key === 'whenDate') {
       const formattedDate = format(value, 'MM/dd/yyyy');
       setWhenDate(value);
@@ -54,6 +57,7 @@ const HomeSelectionsCard = () => {
   }
 
   useEffect(() => {
+    // Adds the current day's date to the state on first render.
     if (!homeSelections.whenDate) {
       const today = new Date();
       const formattedDate = format(today, 'MM/dd/yyyy');

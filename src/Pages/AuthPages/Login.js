@@ -4,10 +4,11 @@ import {useDispatch} from 'react-redux';
 import {Formik} from 'formik';
 import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
-import AuthInput from '../../components/Input/AuthInput';
-import {EyeClose, EyeOpen, Mail} from '../../components/Icons';
+
 import colors from '../../styles/colors';
 import Button from '../../components/Button/Button';
+import AuthInput from '../../components/Input/AuthInput';
+import {EyeClose, EyeOpen, Mail} from '../../components/Icons';
 import authErrorMessages from '../../utils/authErrorMessages';
 import {changeButtonLoading} from '../../redux/reducers';
 
@@ -28,6 +29,7 @@ const Login = ({navigation}) => {
   async function handleLogin(formValues) {
     dispatch(changeButtonLoading(true));
     try {
+      //Login function.
       await auth().signInWithEmailAndPassword(
         formValues.email,
         formValues.password,

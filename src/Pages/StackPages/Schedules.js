@@ -2,14 +2,15 @@ import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {showMessage} from 'react-native-flash-message';
+
 import BottomButtons from '../../components/cards/BottomButtons';
-import colors from '../../styles/colors';
 import SchedulesListCard from '../../components/cards/SchedulesListCard';
+import {ArrowFull} from '../../components/Icons';
+import colors from '../../styles/colors';
 import {
   addSelectedBusTicket,
   changeAvailableBusTickets,
 } from '../../redux/reducers';
-import {ArrowFull} from '../../components/Icons';
 
 const Schedules = ({navigation}) => {
   const availableBusTickets = useSelector(state => state.availableBusTickets);

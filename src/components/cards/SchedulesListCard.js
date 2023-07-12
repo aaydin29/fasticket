@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+
 import colors from '../../styles/colors';
 import {addSelectedBusTicket} from '../../redux/reducers';
 
@@ -24,7 +25,6 @@ const SchedulesListCard = () => {
       const [hour, minute] = time.split(':');
       return parseInt(hour, 10) * 60 + parseInt(minute, 10);
     };
-
     const sorted = availableBusTickets.slice().sort((a, b) => {
       const timeA = convertTimeToMinutes(a.departureTime);
       const timeB = convertTimeToMinutes(b.departureTime);

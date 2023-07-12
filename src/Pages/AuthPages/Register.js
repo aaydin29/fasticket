@@ -5,8 +5,13 @@ import {showMessage} from 'react-native-flash-message';
 import {Formik} from 'formik';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
+
 import colors from '../../styles/colors';
 import AuthInput from '../../components/Input/AuthInput';
+import AuthCheckbox from '../../components/CheckBox/AuthCheckbox';
+import Button from '../../components/Button/Button';
+import authErrorMessages from '../../utils/authErrorMessages';
+import {changeButtonLoading} from '../../redux/reducers';
 import {
   Birthday,
   EyeClose,
@@ -15,10 +20,6 @@ import {
   Mail,
   User,
 } from '../../components/Icons';
-import AuthCheckbox from '../../components/CheckBox/AuthCheckbox';
-import Button from '../../components/Button/Button';
-import authErrorMessages from '../../utils/authErrorMessages';
-import {changeButtonLoading} from '../../redux/reducers';
 
 const initialFormValues = {
   username: '',
@@ -72,6 +73,7 @@ const Register = ({navigation}) => {
       return;
     }
     try {
+      // Registration function.
       await auth().createUserWithEmailAndPassword(email, repassword);
       await database().ref(`users/${auth().currentUser.uid}`).set({
         fullName: username,
@@ -108,6 +110,7 @@ const Register = ({navigation}) => {
   }
 
   function onChangeText(text, setFieldValue) {
+    // It allows the Birthday to be written in dd/mm/yyyy format.
     const numbersOnly = text.replace(/\D/g, '');
     let formattedDate = '';
     if (numbersOnly.length > 0) {

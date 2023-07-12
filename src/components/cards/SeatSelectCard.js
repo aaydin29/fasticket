@@ -10,6 +10,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {showMessage} from 'react-native-flash-message';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
+
 import colors from '../../styles/colors';
 import {addSelectedSeats, addSelectedTicketPrice} from '../../redux/reducers';
 
@@ -28,6 +29,7 @@ const SeatSelectCard = () => {
 
   useEffect(() => {
     try {
+      // It fecth user gender from database.
       const userId = auth().currentUser.uid;
       database()
         .ref(`users/${userId}/gender`)
@@ -44,6 +46,7 @@ const SeatSelectCard = () => {
 
   const handleSeatPress = seatNumber => {
     if (
+      // Seat controls
       selectedSeats.includes(seatNumber) ||
       selectedSeats.length >= 3 ||
       selectedBusTicket.reservedSeats.includes(seatNumber) ||
@@ -64,9 +67,9 @@ const SeatSelectCard = () => {
       return;
     }
 
+    // Controls to ensure that men and women cannot sit side by side.
     const reservedSeatsByMan = selectedBusTicket.reservedByMan;
     const reservedSeatsByWoman = selectedBusTicket.reservedByWoman;
-
     if (userGender === 'male') {
       const adjacentReservedSeats = [
         {seat: 8, adjacent: 15},
@@ -123,6 +126,7 @@ const SeatSelectCard = () => {
   };
 
   const renderSeat = seatNumber => {
+    // Arranging seats and styles according to seat occupancy, vacancy and seat occupant gender.
     const isSelected = selectedSeats?.includes(seatNumber);
 
     const isGenderMale = selectedBusTicket?.reservedByMan?.includes(seatNumber);

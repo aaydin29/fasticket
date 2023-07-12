@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {showMessage} from 'react-native-flash-message';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
+
 import colors from '../../styles/colors';
 import BottomButtons from '../../components/cards/BottomButtons';
 import SuccessMessageCard from '../../components/cards/SuccessMessageCard';
@@ -29,6 +30,7 @@ const PaymentSuccess = ({navigation}) => {
   }
 
   async function handleBackToHome() {
+    // Saves persistent data, resets others.
     const id = generateRandomId();
     const newTicket = {
       ticketId: id,

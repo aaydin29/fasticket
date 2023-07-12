@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import React from 'react';
 import CheckBox from '@react-native-community/checkbox';
+
 import colors from '../../styles/colors';
 
 const AuthCheckbox = ({value, onValueChange, text, style}) => {

@@ -2,10 +2,11 @@ import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {showMessage} from 'react-native-flash-message';
-import colors from '../../styles/colors';
+
 import SeatSelectCard from '../../components/cards/SeatSelectCard';
 import BottomButtons from '../../components/cards/BottomButtons';
 import {addSelectedSeats} from '../../redux/reducers';
+import colors from '../../styles/colors';
 
 const Seats = ({navigation}) => {
   const selectedSeats = useSelector(state => state.selectedSeats);

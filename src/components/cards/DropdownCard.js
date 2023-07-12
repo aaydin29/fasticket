@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import React from 'react';
 import {Dropdown} from 'react-native-element-dropdown';
+
 import colors from '../../styles/colors';
 
 const DropdownCard = ({placeholder, value, data, onChange, label}) => {

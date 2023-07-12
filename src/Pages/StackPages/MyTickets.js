@@ -10,11 +10,12 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
-import {MenuLines} from '../../components/Icons';
-import colors from '../../styles/colors';
-import MenuModal from '../../components/modals/MenuModal';
 import Collapsible from 'react-native-collapsible';
+
+import {MenuLines} from '../../components/Icons';
+import MenuModal from '../../components/modals/MenuModal';
 import {addMyTickets} from '../../redux/reducers';
+import colors from '../../styles/colors';
 
 const MyTickets = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -28,6 +29,7 @@ const MyTickets = ({navigation}) => {
   }
 
   function handleTicketPress(index) {
+    // Allows only the selected ticket to be opened.
     if (expandedTicketIndex === index) {
       setExpandedTicketIndex(null);
     } else {
@@ -36,6 +38,7 @@ const MyTickets = ({navigation}) => {
   }
 
   async function handleDeleteAll() {
+    // Delete tickets data from redux and firebase database.
     dispatch(addMyTickets([]));
     try {
       const userId = auth().currentUser.uid;

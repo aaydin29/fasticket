@@ -3,6 +3,7 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import {useNavigationState} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
+
 import colors from '../../styles/colors';
 import {Feedback, Home, Logout, Ticket} from '../Icons';
 

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+
 import colors from '../../styles/colors';
 import {CheckCircle} from '../Icons';
 import {changePaymentInfo} from '../../redux/reducers';
@@ -23,6 +24,7 @@ const PaymentCard = () => {
     let updatedValue = value;
 
     if (key === 'cardNumber') {
+      // Setting card numbers to leave a space at 4 digits.
       value = value.replace(/\s/g, '');
       value = value.replace(/\d{4}(?=.)/g, '$& ');
       const isNumberTrue = updatedValue.length === 19;
@@ -34,6 +36,7 @@ const PaymentCard = () => {
         }),
       );
     } else if (key === 'expiryDate') {
+      // Setting Expiry Date to be written in mm/yy format.
       const formattedValue = value.replace(/\D/g, '');
 
       if (formattedValue.length <= 2) {
@@ -89,6 +92,7 @@ const PaymentCard = () => {
             <Text style={styles.date_text}>Expiry Date</Text>
             <TextInput
               style={styles.date_input}
+              placeholder="mm/yy"
               maxLength={5}
               value={paymentInfo.expiryDate}
               keyboardType="numeric"

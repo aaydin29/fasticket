@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import FlashMessage from 'react-native-flash-message';
 import auth from '@react-native-firebase/auth';
+
 import colors from './styles/colors';
 
 import Login from './Pages/AuthPages/Login';
@@ -30,7 +31,9 @@ const LoginPages = () => {
 
 const Router = () => {
   const [userSession, setUserSession] = useState();
+
   useEffect(() => {
+    // User login control
     auth().onAuthStateChanged(user => {
       setUserSession(user);
     });
